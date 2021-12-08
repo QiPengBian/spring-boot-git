@@ -3,12 +3,14 @@ package com.example.sys.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 用户信息表
@@ -21,7 +23,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@TableName("sys_user")
+@JsonIgnoreProperties(value = {"handler"})
+@TableName(value = "sys_user", resultMap = "userMap")
 public class UserEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +49,8 @@ public class UserEntity implements Serializable {
 	 */
 	@TableField(value = "enabled")
 	private Integer enabled;
+
+	private List<RoleEntity> roleEntityList;
 
 	public static final String ID = "id";
 

@@ -9,7 +9,22 @@
         <result property="username" column="username"/>
         <result property="password" column="password"/>
         <result property="enabled" column="enabled"/>
+        <collection property="roleEntityList" column="id" select="queryRoleByUserId" fetchType="lazy"/>
     </resultMap>
 
-
+    <select id="queryRoleByUserId" resultMap="com.example.sys.mapper.RoleMapper.roleMap">
+        SELECT
+        r.*
+        FROM
+        sys_user_role ur
+        LEFT JOIN sys_role r ON ur.user_id = r.id
+        <choose>
+            <when test="userId !=null and userId != ''">
+                where ur.user_id = #{userId}
+            </when>
+            <otherwise>
+                where ur.user_id = 0
+            </otherwise>
+        </choose>
+    </select>
 </mapper>
