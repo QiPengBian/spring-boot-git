@@ -11,7 +11,7 @@ logging:
     com.xkcoding: debug
     com.xkcoding.orm.mybatis.plus.mapper: trace
 mybatis-plus:
-  mapper-locations: classpath:mappers/*.xml
+  mapper-locations: classpath:mappers/*/*.xml
   #实体扫描，多个package用逗号或者分号分隔
   typeAliasesPackage: com.example.**.domain
   global-config:
@@ -31,5 +31,8 @@ mybatis-plus:
     cache-enabled: true
     # 打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启这个会根据需求进行懒加载
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
 
 

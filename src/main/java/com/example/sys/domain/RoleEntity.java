@@ -3,12 +3,14 @@ package com.example.sys.domain;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 角色信息表
@@ -21,24 +23,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@TableName("sys_role")
+// 处理序列化异常
+@JsonIgnoreProperties(value = {"handler"})
+@TableName(value = "sys_role", resultMap = "roleMap")
 public class RoleEntity implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 角色ID
-	 */
-	@TableId
-	private Long id;
-	/**
-	 * 角色名称
-	 */
-	@TableField(value = "role_name")
-	private String roleName;
+    /**
+     * 角色ID
+     */
+    @TableId
+    private Long id;
+    /**
+     * 角色名称
+     */
+    @TableField(value = "role_name")
+    private String roleName;
 
-	public static final String ID = "id";
+    private List<MenuEntity> menuEntityList;
 
-	public static final String ROLE_NAME = "role_name";
+    public static final String ID = "id";
+
+    public static final String ROLE_NAME = "role_name";
 
 }
