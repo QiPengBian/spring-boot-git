@@ -1,8 +1,13 @@
 package com.example.sys.controller;
 
+import com.example.common.domain.Resp;
+import com.example.sys.domain.UserEntity;
 import com.example.sys.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 用户信息表
@@ -16,5 +21,11 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @GetMapping("/list")
+    public Resp<List<UserEntity>> list() {
+        List<UserEntity> userEntityList = userService.list();
+        return Resp.ok(userEntityList);
+    }
 
 }
