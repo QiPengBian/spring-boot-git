@@ -31,5 +31,8 @@ mybatis-plus:
     cache-enabled: true
     # 打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 开启这个会根据需求进行懒加载
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
 
 

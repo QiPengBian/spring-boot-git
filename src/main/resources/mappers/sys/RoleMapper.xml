@@ -3,11 +3,28 @@
 
 <mapper namespace="com.example.sys.mapper.RoleMapper">
 
-	<!-- 可根据自己的需求，是否要使用 -->
+    <!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.example.sys.domain.RoleEntity" id="roleMap">
         <result property="id" column="id"/>
         <result property="roleName" column="role_name"/>
+        <association property="id" column="roleId" select="queryMenuByRoleId"/>
+        <collection property="menuEntityList" column="id" select="queryMenuByRoleId" fetchType="lazy"/>
     </resultMap>
 
+    <select id="queryMenuByRoleId" resultMap="com.example.sys.mapper.MenuMapper.menuMap">
+        SELECT
+        m.*
+        FROM
+        sys_role_menu rm
+        LEFT JOIN sys_menu m ON rm.menu_id = m.id
+        <choose>
+            <when test="roleId !=null and roleId != ''">
+                where rm.role_id = #{roleId}
+            </when>
+            <otherwise>
+                where rm.role_id = 0
+            </otherwise>
+        </choose>
+    </select>
 
 </mapper>

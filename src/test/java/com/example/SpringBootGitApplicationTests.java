@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.sys.domain.UserEntity;
+import com.example.sys.mapper.RoleMapper;
 import com.example.sys.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ class SpringBootGitApplicationTests {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Test
     void contextLoads() {
